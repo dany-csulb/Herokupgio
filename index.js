@@ -15,7 +15,6 @@ const pool = new Pool({
 // Set up EJS
 app.set("view engine", "ejs");
 
-
 // Start listener
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server started (http://localhost:3000/) !");
@@ -26,17 +25,17 @@ app.get("/", (req, res) => {
   //res.send ("Hello world...");
   const sql = "SELECT * FROM PRODUCT ORDER BY PROD_ID";
   pool.query(sql, [], (err, result) => {
-      var message = "";
-      var model = {};
-      if(err) {
-          message = `Error - ${err.message}`;
-      } else {
-          message = "success";
-          model = result.rows;
-      };
-      res.render("index", {
-          message: message,
-          model : model
-      });
+    var message = "";
+    var model = {};
+    if(err) {
+      message = `Error - ${err.message}`;
+    } else {
+      message = "success";
+       model = result.rows;
+    };
+    res.render("index", {
+      message: message,
+      model : model
+    });
   });
 });
